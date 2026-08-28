@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8" />
@@ -8,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- Font Awesome 6 (مجانية) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
             margin: 0;
@@ -22,9 +23,8 @@
             justify-content: center;
             align-items: center;
             font-family: 'Tajawal', 'Segoe UI', system-ui, sans-serif;
-            background: #f5f7fa;
+            background: #f5f7fa; /* خلفية بيضاء ناعمة */
             padding: 16px;
-            /* تحسين للشاشات الصغيرة */
             margin: 0;
         }
 
@@ -33,7 +33,6 @@
             max-width: 850px;
             width: 100%;
             background: rgba(255, 255, 255, 0.6);
-            /* دعم أفضل لأندرويد */
             backdrop-filter: blur(24px) saturate(200%);
             -webkit-backdrop-filter: blur(24px) saturate(200%);
             border-radius: 40px;
@@ -46,7 +45,6 @@
             overflow: hidden;
         }
 
-        /* تأثير إضافي */
         .glass-card::before {
             content: '';
             position: absolute;
@@ -63,7 +61,7 @@
             display: flex;
             align-items: center;
             gap: 14px;
-            margin-bottom: 18px;
+            margin-bottom: 8px;
             position: relative;
             z-index: 1;
             flex-wrap: wrap;
@@ -78,7 +76,6 @@
             object-fit: cover;
             background: #e2e8f0;
             flex-shrink: 0;
-            /* منع التمدد */
             max-width: 70px;
         }
 
@@ -104,8 +101,37 @@
             color: #334155;
         }
 
-        /* زر الصوت – حجم مناسب للأندرويد */
-        .read-btn {
+        /* شارة AI تحت البروفايل (بجانب الزر) */
+        .ai-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 40px;
+            padding: 4px 14px 4px 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #2563eb;
+            backdrop-filter: blur(4px);
+            white-space: nowrap;
+            margin-right: auto;
+            margin-left: 8px;
+        }
+        .ai-badge i {
+            font-size: 0.9rem;
+            color: #2563eb;
+        }
+
+        /* زر الصوت + زر الترجمة */
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .read-btn, .translate-btn {
             background: rgba(255, 255, 255, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.8);
             color: #1e293b;
@@ -120,37 +146,34 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            margin-right: auto;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            /* تحسين اللمس */
             touch-action: manipulation;
             user-select: none;
             -webkit-user-select: none;
         }
-        .read-btn:active {
+        .read-btn:active, .translate-btn:active {
             transform: scale(0.92);
             background: rgba(255, 255, 255, 0.8);
         }
-        .read-btn svg {
-            width: 26px;
-            height: 26px;
-            fill: currentColor;
+        .read-btn svg, .translate-btn i {
             pointer-events: none;
+            font-size: 1.4rem;
+        }
+        .translate-btn i {
+            color: #2563eb;
         }
 
-        /* محتوى السياسة */
+        /* محتوى السياسة – يحتوي على نسختين (عربي/إنجليزي) */
         .policy-content {
             position: relative;
             z-index: 1;
-            margin: 8px 0 16px;
+            margin: 12px 0 16px;
             line-height: 1.8;
             font-size: clamp(0.9rem, 2.2vw, 1rem);
             max-height: 65vh;
             overflow-y: auto;
             padding-left: 4px;
             padding-right: 4px;
-            /* تحسين التمرير للأندرويد */
             -webkit-overflow-scrolling: touch;
             scroll-behavior: smooth;
             color: #0f172a;
@@ -164,6 +187,21 @@
         .policy-content::-webkit-scrollbar-thumb {
             background: rgba(0, 0, 0, 0.15);
             border-radius: 10px;
+        }
+
+        /* النصوص داخل المحتوى */
+        .policy-content .lang-arabic,
+        .policy-content .lang-english {
+            transition: opacity 0.3s ease;
+        }
+        .policy-content .lang-english {
+            display: none;
+        }
+        .policy-content.show-english .lang-arabic {
+            display: none;
+        }
+        .policy-content.show-english .lang-english {
+            display: block;
         }
 
         .policy-content h1,
@@ -190,7 +228,7 @@
             margin: 0.4em 0;
         }
 
-        /* زر البريد الإلكتروني – مناسب للأندرويد */
+        /* زر البريد الإلكتروني */
         .footer-actions {
             display: flex;
             justify-content: center;
@@ -228,12 +266,9 @@
             transform: scale(0.97);
             background: rgba(255, 255, 255, 0.85);
         }
-        .email-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: currentColor;
+        .email-btn i {
+            font-size: 1.2rem;
             opacity: 0.7;
-            flex-shrink: 0;
         }
         .email-btn span {
             direction: ltr;
@@ -241,7 +276,7 @@
             font-weight: 400;
         }
 
-        /* تحسين للشاشات الصغيرة جداً */
+        /* تحسين للشاشات الصغيرة */
         @media (max-width: 480px) {
             body {
                 padding: 10px;
@@ -255,13 +290,17 @@
                 height: 56px;
                 max-width: 56px;
             }
-            .read-btn {
+            .read-btn, .translate-btn {
                 width: 42px;
                 height: 42px;
             }
             .read-btn svg {
                 width: 22px;
                 height: 22px;
+            }
+            .ai-badge {
+                font-size: 0.7rem;
+                padding: 2px 10px 2px 8px;
             }
             .email-btn {
                 padding: 12px 18px;
@@ -281,7 +320,7 @@
             .header-text h1 {
                 font-size: 1.1rem;
             }
-            .read-btn {
+            .read-btn, .translate-btn {
                 width: 38px;
                 height: 38px;
             }
@@ -291,7 +330,7 @@
 <body>
     <div class="glass-card">
 
-        <!-- الملف الشخصي -->
+        <!-- الملف الشخصي مع شارة AI وزر الترجمة -->
         <div class="profile-section">
             <img 
                 class="profile-avatar" 
@@ -304,14 +343,28 @@
                 <h1>سياسات والخصوصية شات بوت</h1>
                 <div class="sub-date">الإثنين 10 اغسطس 2026</div>
             </div>
-            <button class="read-btn" id="readAloudBtn" type="button" aria-label="قراءة النص بصوت">
-                <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-            </button>
+
+            <!-- شارة ✦ AI (بالأزرق) -->
+            <div class="ai-badge">
+                <i class="fas fa-star"></i> ✦ AI
+            </div>
+
+            <!-- أزرار الصوت والترجمة -->
+            <div class="action-buttons">
+                <button class="read-btn" id="readAloudBtn" type="button" aria-label="قراءة النص بصوت">
+                    <svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                </button>
+                <button class="translate-btn" id="translateBtn" type="button" aria-label="ترجمة إلى الإنجليزية">
+                    <i class="fas fa-language"></i>
+                </button>
+            </div>
         </div>
 
-        <!-- محتوى السياسة – النص الأصلي بدون تغيير -->
+        <!-- محتوى السياسة (نسختين: عربي وإنجليزي) -->
         <div class="policy-content" id="policyText">
-            <h6>سياسة الخصوصية لبوت [Chatbot]
+            <!-- النص العربي (الأصلي) -->
+            <div class="lang-arabic">
+                <h6>سياسة الخصوصية لبوت [Chatbot]
 
 آخر تحديث: [الثلاثاء 28 يوليوز 2026]
 
@@ -394,12 +447,100 @@
 <h3>الإثنين 10 اغسطس 2026</h3>
 
 <h3>جميع الحقوق محفوظه لهذا البوت</h3>
+            </div>
+
+            <!-- النص الإنجليزي (مترجم) -->
+            <div class="lang-english">
+                <h6>Privacy Policy for [Chatbot] Bot
+
+Last updated: [Tuesday, July 28, 2026]
+
+Welcome to [Chatbot] Bot. We are committed to protecting your privacy and ensuring transparency in handling your data. This policy explains how we collect, use, and protect your information when you interact with our bot via Facebook Messenger.
+
+1. Information We Collect
+
+When using the bot, we may collect:
+
+· Basic information: Page-scoped user ID (PSID), and your public Facebook profile name.
+· Conversation content: Messages you send to the bot, questions you ask, and instructions you provide.
+· Interaction data: Your points history, conversation timestamps, and usage frequency.
+
+2. How We Use Your Information
+
+We use the data we collect for the following purposes:
+
+· Operating and improving the bot: To provide accurate responses and analyze conversation patterns to enhance performance.
+· Personalizing experience: To remember your preferences and past conversations for smoother interaction.
+· Managing the points system: To track your points, update your balance, and grant rewards that increase your speaking opportunities.
+· Quality monitoring and compliance: To ensure adherence to our usage policy and detect any misuse or violations.
+
+3. Human-like Behavior Simulation
+
+[Chatbot] Bot uses AI technologies designed to simulate human conversation. This means:
+
+· The bot is not human; it is a program aimed at making your interaction natural and smooth.
+· Your inputs are analyzed to generate human-like replies, but all responses are generated automatically.
+· Although we strive to provide a human-like experience, the bot should not be considered a substitute for professional advice in sensitive matters (e.g., health or legal).
+
+4. Points System and Increased Speaking Chances
+
+Our bot has a points system to encourage interaction:
+
+· Earning points: You can earn points by interacting with the bot, completing specific tasks, or participating in activities announced by the bot.
+· Using points: Points give you additional benefits, such as higher reply priority, exclusive content, or longer conversation sessions.
+· Note: Points have no monetary value and cannot be exchanged for real money. They are tied to your account and are non-transferable.
+
+5. Ban and Service Termination
+
+To ensure a safe and respectful environment, we reserve the right to temporarily or permanently ban any user in the following cases:
+
+· Misuse: Using offensive language, harassment, or attempting to hack the bot.
+· Violation of terms: Attempting to manipulate the points system or using the bot for illegal purposes.
+· Excessive requests: Sending a large volume of messages to disrupt the service (known as flooding attacks).
+If your account is banned, you may lose your points and access to the bot. You may contact us to appeal the ban decision.
+
+6. Data Sharing with Third Parties
+
+· We do not sell your personal information or conversations to any third party.
+· We may share aggregated and non-identifiable data (e.g., usage statistics) with technical partners to improve the bot.
+· Since the bot operates on Facebook Messenger, Meta's privacy policy also applies to your interaction, and Meta may use interaction data for its purposes (e.g., improving ads) in accordance with its policies.
+
+7. Data Protection and Storage
+
+· We implement reasonable security measures to protect your data from unauthorized access.
+· We may retain conversation logs for a limited period to improve the bot, then delete or permanently anonymize them.
+· Despite our efforts, we cannot guarantee 100% data security during transmission over the internet.
+
+8. Your Rights
+
+You have the right to:
+
+· Request deletion of your data: Contact us to request deletion of your stored information.
+· Opt out of the points system: You can withdraw from the points system at any time.
+· Access your data: Request a copy of the data we hold about you.
+
+9. Contact Us
+
+For inquiries about this policy, to delete your data, or to appeal a ban, please contact us.
+
+10. Policy Amendments
+
+We may update this policy from time to time. We will notify you of any material changes via the bot or our Facebook page. Continued use of the bot after the amendment constitutes your acceptance of the updated policy.
+
+Copyright Notice
+All content published on the Chatbot page – including images, videos, texts, and designs generated by AI tools owned by the page – is the exclusive intellectual property of the Chatbot page.
+Commercial republication or use without prior written permission from the page administration is prohibited. © 2026</h6>
+
+<h3>Monday, August 10, 2026</h3>
+
+<h3>All rights reserved for this bot</h3>
+            </div>
         </div>
 
-        <!-- زر البريد الإلكتروني – النص الجديد -->
+        <!-- زر البريد الإلكتروني -->
         <div class="footer-actions">
             <a href="mailto:contactchatbot1@gmail.com" class="email-btn">
-                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <i class="fas fa-envelope"></i>
                 <span>للتواصل مع المطور اضغط لتواصل عبر بريد الكتروني</span>
             </a>
         </div>
@@ -408,57 +549,73 @@
 
     <script>
         (function() {
+            // قراءة النص
             const readBtn = document.getElementById('readAloudBtn');
             const policyDiv = document.getElementById('policyText');
             let isReading = false;
             let utterance = null;
 
-            // التحقق من دعم Speech Synthesis
+            // الترجمة
+            const translateBtn = document.getElementById('translateBtn');
+            let isEnglish = false;
+
+            // دعم Speech Synthesis
             const supportsSpeech = 'speechSynthesis' in window;
 
-            function getPolicyText() {
+            function getCurrentText() {
+                // نأخذ النص المعروض حالياً (العربي أو الإنجليزي)
+                const arabic = policyDiv.querySelector('.lang-arabic');
+                const english = policyDiv.querySelector('.lang-english');
+                if (arabic && english) {
+                    if (policyDiv.classList.contains('show-english')) {
+                        return english.innerText;
+                    } else {
+                        return arabic.innerText;
+                    }
+                }
                 return policyDiv.innerText;
             }
 
             function speakText() {
                 if (!supportsSpeech) {
-                    // تنبيه للمستخدم في حال عدم الدعم
                     alert('متصفحك لا يدعم خاصية قراءة النص صوتياً.');
                     return;
                 }
 
-                // إذا كان يقرأ حالياً، إيقاف
                 if (isReading) {
                     window.speechSynthesis.cancel();
                     isReading = false;
-                    readBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
+                    readBtn.innerHTML = `<svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
                     return;
                 }
 
-                const text = getPolicyText().trim();
+                const text = getCurrentText().trim();
                 if (!text) return;
 
                 utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'ar-SA';
+                // تحديد اللغة حسب النص المعروض
+                if (policyDiv.classList.contains('show-english')) {
+                    utterance.lang = 'en-US';
+                } else {
+                    utterance.lang = 'ar-SA';
+                }
                 utterance.rate = 0.9;
                 utterance.pitch = 1;
                 utterance.volume = 1;
 
                 utterance.onstart = function() {
                     isReading = true;
-                    readBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+                    readBtn.innerHTML = `<svg viewBox="0 0 24 24" width="26" height="26"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
                 };
 
                 utterance.onend = function() {
                     isReading = false;
-                    readBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
+                    readBtn.innerHTML = `<svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
                 };
 
                 utterance.onerror = function(event) {
-                    // في حالة خطأ (مثل عدم وجود أصوات)
                     isReading = false;
-                    readBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
-                    // تجاهل الخطأ إذا كان بسبب الإلغاء
+                    readBtn.innerHTML = `<svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
                     if (event.error !== 'canceled') {
                         console.warn('Speech error:', event.error);
                     }
@@ -467,16 +624,41 @@
                 window.speechSynthesis.speak(utterance);
             }
 
-            // إضافة حدث النقر مع منع الازدواجية
+            // تبديل الترجمة
+            function toggleTranslation() {
+                isEnglish = !isEnglish;
+                if (isEnglish) {
+                    policyDiv.classList.add('show-english');
+                    translateBtn.innerHTML = '<i class="fas fa-language" style="color:#2563eb;"></i>';
+                    // تغيير النص التعريفي للزر
+                    translateBtn.setAttribute('aria-label', 'عرض النص العربي');
+                } else {
+                    policyDiv.classList.remove('show-english');
+                    translateBtn.innerHTML = '<i class="fas fa-language" style="color:#2563eb;"></i>';
+                    translateBtn.setAttribute('aria-label', 'ترجمة إلى الإنجليزية');
+                }
+                // إيقاف القراءة الحالية إن وجدت
+                if (isReading) {
+                    window.speechSynthesis.cancel();
+                    isReading = false;
+                    readBtn.innerHTML = `<svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
+                }
+            }
+
+            // أحداث
             readBtn.addEventListener('click', speakText);
-            // دعم اللمس للأندرويد (نفس الحدث)
             readBtn.addEventListener('touchstart', function(e) {
-                // منع التكرار عند اللمس
                 e.preventDefault();
                 speakText();
             }, { passive: false });
 
-            // تحسين: إلغاء القراءة عند مغادرة الصفحة
+            translateBtn.addEventListener('click', toggleTranslation);
+            translateBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                toggleTranslation();
+            }, { passive: false });
+
+            // إلغاء القراءة عند مغادرة الصفحة
             window.addEventListener('beforeunload', function() {
                 if (isReading) {
                     window.speechSynthesis.cancel();
