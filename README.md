@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8" />
@@ -8,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* === كل الأنماط السابقة مع إضافة تنسيق النجوم === */
         * {
             margin: 0;
             padding: 0;
@@ -53,7 +53,6 @@
             pointer-events: none;
         }
 
-        /* === حاوية الصورة مع النجوم === */
         .avatar-wrapper {
             position: relative;
             width: 90px;
@@ -65,7 +64,6 @@
             justify-content: center;
         }
 
-        /* النجوم الخمسة حول الصورة */
         .star-ring {
             position: absolute;
             top: 0;
@@ -84,19 +82,17 @@
             transform-origin: center;
             line-height: 1;
         }
-        /* توزيع النجوم بزوايا 0, 72, 144, 216, 288 درجة */
         .star-ring .star:nth-child(1) { top: -8px; left: 50%; transform: translateX(-50%); }
         .star-ring .star:nth-child(2) { top: 18%; right: -8px; transform: translateY(-50%); }
         .star-ring .star:nth-child(3) { bottom: -8px; left: 50%; transform: translateX(-50%); }
         .star-ring .star:nth-child(4) { bottom: 18%; left: -8px; transform: translateY(50%); }
-        .star-ring .star:nth-child(5) { top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.3); opacity: 0.3; } /* نجم مركزي خفيف */
+        .star-ring .star:nth-child(5) { top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.3); opacity: 0.3; }
 
         @keyframes twinkle {
             0% { opacity: 0.6; transform: scale(0.9); }
             100% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* canvas الشبكة العصبية */
         .avatar-wrapper canvas {
             position: absolute;
             top: 50%;
@@ -124,7 +120,6 @@
             display: block;
         }
 
-        /* باقي الأنماط كما هي */
         .profile-section {
             display: flex;
             align-items: center;
@@ -220,8 +215,8 @@
             position: relative;
             z-index: 1;
             margin: 12px 0 16px;
-            line-height: 1.8;
-            font-size: clamp(0.9rem, 2.2vw, 1rem);
+            line-height: 1.9;
+            font-size: clamp(0.95rem, 2.2vw, 1.05rem);
             max-height: 65vh;
             overflow-y: auto;
             padding: 0 4px;
@@ -254,28 +249,52 @@
             display: block;
         }
 
-        .policy-content h1,
-        .policy-content h6,
-        .policy-content h3 {
-            color: #0f172a;
-            margin: 0.6em 0 0.3em;
-            font-weight: 600;
-        }
-        .policy-content h1 {
-            font-size: clamp(1.3rem, 4vw, 1.6rem);
-        }
+        /* تنسيق النص المنظم */
         .policy-content h6 {
-            font-size: clamp(0.85rem, 2vw, 1rem);
+            font-size: clamp(0.95rem, 2.2vw, 1.05rem);
             font-weight: 400;
-            line-height: 1.8;
+            line-height: 1.9;
             color: #1e293b;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .policy-content h6 strong {
+            font-weight: 600;
+            color: #0f172a;
         }
         .policy-content h3 {
             font-size: clamp(0.95rem, 2.2vw, 1.1rem);
-            opacity: 0.75;
+            opacity: 0.8;
+            margin: 0.8em 0 0.2em;
+            font-weight: 500;
         }
-        .policy-content p {
-            margin: 0.4em 0;
+        .policy-content .section-title {
+            display: block;
+            font-weight: 700;
+            color: #0f172a;
+            font-size: 1.1em;
+            margin-top: 1em;
+            margin-bottom: 0.3em;
+        }
+        .policy-content .list-item {
+            display: block;
+            padding-right: 1.2em;
+            margin: 0.2em 0;
+            position: relative;
+        }
+        .policy-content .list-item::before {
+            content: "•";
+            position: absolute;
+            right: 0;
+            color: #2563eb;
+            font-weight: bold;
+        }
+        .policy-content .sub-list {
+            padding-right: 1.8em;
+        }
+        .policy-content .sub-list .list-item::before {
+            content: "◦";
+            color: #4f8cf7;
         }
 
         .footer-actions {
@@ -333,7 +352,7 @@
             .read-btn svg { width: 22px; height: 22px; }
             .ai-badge { font-size: 0.7rem; padding: 2px 10px 2px 8px; }
             .email-btn { padding: 12px 18px; font-size: 0.85rem; gap: 8px; }
-            .policy-content { max-height: 60vh; font-size: 0.85rem; }
+            .policy-content { max-height: 60vh; font-size: 0.9rem; }
         }
 
         @media (max-width: 380px) {
@@ -347,10 +366,9 @@
 <body>
     <div class="glass-card">
 
-        <!-- الملف الشخصي مع شارة ✦ AI ونجوم تلتف حول الصورة -->
+        <!-- الملف الشخصي مع شارة ✦ AI ونجوم -->
         <div class="profile-section">
             <div class="avatar-wrapper" id="avatarWrapper">
-                <!-- حلقة النجوم الخمسة -->
                 <div class="star-ring">
                     <span class="star">✦</span>
                     <span class="star">✦</span>
@@ -358,7 +376,6 @@
                     <span class="star">✦</span>
                     <span class="star">✦</span>
                 </div>
-                <!-- صورة الملف الشخصي -->
                 <img class="profile-avatar" src="bfd8c880-8807-11f1-8108-b3a8e4e1fe89.png" alt="شعار البوت" loading="lazy" onerror="this.style.display='none'" />
             </div>
 
@@ -381,178 +398,184 @@
             </div>
         </div>
 
-        <!-- محتوى السياسة (بدون تغيير) -->
+        <!-- محتوى السياسة – منظم بشكل أنيق مع الحفاظ على النص الأصلي -->
         <div class="policy-content" id="policyText">
             <div class="lang-arabic">
-                <h6>سياسة الخصوصية لبوت [Chatbot]
+                <h6>
+                    <strong>سياسة الخصوصية لبوت [Chatbot]</strong>
 
-آخر تحديث: [الثلاثاء 28 يوليوز 2026]
+                    <span class="section-title">آخر تحديث: [الثلاثاء 28 يوليوز 2026]</span>
 
-مرحباً بك في بوت [Chatbot]. نحن نلتزم بحماية خصوصيتك وشفافية التعامل مع بياناتك. توضح هذه السياسة كيفية جمع معلوماتك واستخدامها وحمايتها عند تفاعلك مع بوتنا عبر فيسبوك ماسنجر.
+                    مرحباً بك في بوت [Chatbot]. نحن نلتزم بحماية خصوصيتك وشفافية التعامل مع بياناتك. توضح هذه السياسة كيفية جمع معلوماتك واستخدامها وحمايتها عند تفاعلك مع بوتنا عبر فيسبوك ماسنجر.
 
-1. المعلومات التي نجمعها
+                    <span class="section-title">1. المعلومات التي نجمعها</span>
 
-عند استخدامك للبوت، قد نقوم بجمع:
+                    عند استخدامك للبوت، قد نقوم بجمع:
 
-· المعلومات الأساسية: معرف المستخدم الخاص بالصفحة (PSID)،والاسم العام لملفك الشخصي على فيسبوك.
-· محتويات المحادثة: الرسائل التي ترسلها للبوت، والأسئلة التي تطرحها، والتعليمات التي تقدمها.
-· بيانات التفاعل: سجل نقاطك، وتاريخ ووقت المحادثات، وعدد المرات التي تستخدم فيها البوت.
+                    <span class="list-item">المعلومات الأساسية: معرف المستخدم الخاص بالصفحة (PSID)، والاسم العام لملفك الشخصي على فيسبوك.</span>
+                    <span class="list-item">محتويات المحادثة: الرسائل التي ترسلها للبوت، والأسئلة التي تطرحها، والتعليمات التي تقدمها.</span>
+                    <span class="list-item">بيانات التفاعل: سجل نقاطك، وتاريخ ووقت المحادثات، وعدد المرات التي تستخدم فيها البوت.</span>
 
-2. كيف نستخدم معلوماتك
+                    <span class="section-title">2. كيف نستخدم معلوماتك</span>
 
-نستخدم البيانات التي نجمعها للأغراض التالية:
+                    نستخدم البيانات التي نجمعها للأغراض التالية:
 
-· تشغيل البوت وتحسينه: لتقديم ردود دقيقة، وتحليل أنماط المحادثة لتطوير أداء البوت.
-· تخصيص التجربة: لتذكر تفضيلاتك وسجل محادثاتك السابقة، وجعل التفاعل أكثر سلاسة.
-· إدارة نظام النقاط: لتتبع نقاطك وتحديث رصيدك، ومنحك المكافآت التي تزيد من فرصك في التحدث.
-· مراقبة الجودة والامتثال: لضمان الالتزام بسياسة الاستخدام، واكتشاف أي إساءة أو انتهاك للقوانين.
+                    <span class="list-item">تشغيل البوت وتحسينه: لتقديم ردود دقيقة، وتحليل أنماط المحادثة لتطوير أداء البوت.</span>
+                    <span class="list-item">تخصيص التجربة: لتذكر تفضيلاتك وسجل محادثاتك السابقة، وجعل التفاعل أكثر سلاسة.</span>
+                    <span class="list-item">إدارة نظام النقاط: لتتبع نقاطك وتحديث رصيدك، ومنحك المكافآت التي تزيد من فرصك في التحدث.</span>
+                    <span class="list-item">مراقبة الجودة والامتثال: لضمان الالتزام بسياسة الاستخدام، واكتشاف أي إساءة أو انتهاك للقوانين.</span>
 
-3. محاكاة السلوك البشري
+                    <span class="section-title">3. محاكاة السلوك البشري</span>
 
-يعمل بوت [Chatbot] بتقنيات الذكاء الاصطناعي المصممة لمحاكاة المحادثة البشرية. هذا يعني:
+                    يعمل بوت [Chatbot] بتقنيات الذكاء الاصطناعي المصممة لمحاكاة المحادثة البشرية. هذا يعني:
 
-· البوت ليس إنساناً، بل برنامج يهدف لجعل تفاعلك طبيعياً وسلساً.
-· يتم تحليل مدخلاتك لتوليد ردود تشبه ردود البشر، لكن جميع الردود يتم إنشاؤها آلياً.
-· رغم محاولتنا تقديم تجربة شبيهة بالبشر، لا يمكن اعتبار البوت بديلاً عن الاستشارات البشرية في الأمور الحساسة (كالصحية أو القانونية).
+                    <span class="list-item">البوت ليس إنساناً، بل برنامج يهدف لجعل تفاعلك طبيعياً وسلساً.</span>
+                    <span class="list-item">يتم تحليل مدخلاتك لتوليد ردود تشبه ردود البشر، لكن جميع الردود يتم إنشاؤها آلياً.</span>
+                    <span class="list-item">رغم محاولتنا تقديم تجربة شبيهة بالبشر، لا يمكن اعتبار البوت بديلاً عن الاستشارات البشرية في الأمور الحساسة (كالصحية أو القانونية).</span>
 
-4. نظام النقاط وزيادة فرص التحدث
+                    <span class="section-title">4. نظام النقاط وزيادة فرص التحدث</span>
 
-لبوتنا نظام نقاط يحفز التفاعل:
+                    لبوتنا نظام نقاط يحفز التفاعل:
 
-· كسب النقاط: يمكنك ربح نقاط عبر التفاعل مع البوت، أو إنجاز مهام محددة، أو المشاركة في أنشطة يعلن عنها البوت.
-· استخدام النقاط: تمنحك النقاط مزايا إضافية، مثل زيادة أولوية الردود، أو الحصول على محتوى حصري، أو فترات محادثة أطول.
-· ملاحظة: النقاط ليس لها قيمة نقدية، ولا يمكن استبدالها بأموال حقيقية، وهي خاصة بحسابك ولا تُنقل للآخرين.
+                    <span class="list-item">كسب النقاط: يمكنك ربح نقاط عبر التفاعل مع البوت، أو إنجاز مهام محددة، أو المشاركة في أنشطة يعلن عنها البوت.</span>
+                    <span class="list-item">استخدام النقاط: تمنحك النقاط مزايا إضافية، مثل زيادة أولوية الردود، أو الحصول على محتوى حصري، أو فترات محادثة أطول.</span>
+                    <span class="list-item">ملاحظة: النقاط ليس لها قيمة نقدية، ولا يمكن استبدالها بأموال حقيقية، وهي خاصة بحسابك ولا تُنقل للآخرين.</span>
 
-5. الحظر (الBan) وإنهاء الخدمة
+                    <span class="section-title">5. الحظر (الBan) وإنهاء الخدمة</span>
 
-لضمان بيئة آمنة ومحترمة، نحتفظ بالحق في حظر أي مستخدم بشكل مؤقت أو دائم في الحالات التالية:
+                    لضمان بيئة آمنة ومحترمة، نحتفظ بالحق في حظر أي مستخدم بشكل مؤقت أو دائم في الحالات التالية:
 
-· إساءة الاستخدام: استخدام ألفاظ بذيئة، أو مضايقة، أو محاولة اختراق البوت.
-· انتهاك الشروط: محاولة التلاعب بنظام النقاط، أو استخدام البوت لأغراض غير قانونية.
-· الطلبات المتكررة: إرسال كم هائل من الرسائل بهدف تعطيل الخدمة (ما يعرف بهجمات الإغراق).
-في حال حظر حسابك، قد تفقد نقاطك وإمكانية الوصول للبوت. يمكنك التواصل معنا للاعتراض على قرار الحظر.
+                    <span class="list-item">إساءة الاستخدام: استخدام ألفاظ بذيئة، أو مضايقة، أو محاولة اختراق البوت.</span>
+                    <span class="list-item">انتهاك الشروط: محاولة التلاعب بنظام النقاط، أو استخدام البوت لأغراض غير قانونية.</span>
+                    <span class="list-item">الطلبات المتكررة: إرسال كم هائل من الرسائل بهدف تعطيل الخدمة (ما يعرف بهجمات الإغراق).</span>
 
-6. مشاركة البيانات مع أطراف ثالثة
+                    في حال حظر حسابك، قد تفقد نقاطك وإمكانية الوصول للبوت. يمكنك التواصل معنا للاعتراض على قرار الحظر.
 
-· لا نبيع معلوماتك الشخصية أو محادثاتك لأي طرف ثالث.
-· قد نشارك بيانات مجمعة وغير قابلة للتعريف (مثل إحصاءات الاستخدام) مع شركاء تقنيين لتحسين البوت.
-· نظراً لأن البوت يعمل على منصة فيسبوك ماسنجر، فإن سياسة خصوصية ميتا تنطبق أيضاً على تفاعلك، وقد تستخدم ميتا بيانات التفاعل لأغراضها (كتحسين الإعلانات) وفقاً لسياساتها.
+                    <span class="section-title">6. مشاركة البيانات مع أطراف ثالثة</span>
 
-7. حماية بياناتك وتخزينها
+                    <span class="list-item">لا نبيع معلوماتك الشخصية أو محادثاتك لأي طرف ثالث.</span>
+                    <span class="list-item">قد نشارك بيانات مجمعة وغير قابلة للتعريف (مثل إحصاءات الاستخدام) مع شركاء تقنيين لتحسين البوت.</span>
+                    <span class="list-item">نظراً لأن البوت يعمل على منصة فيسبوك ماسنجر، فإن سياسة خصوصية ميتا تنطبق أيضاً على تفاعلك، وقد تستخدم ميتا بيانات التفاعل لأغراضها (كتحسين الإعلانات) وفقاً لسياساتها.</span>
 
-· نتخذ إجراءات أمنية معقولة لحماية بياناتك من الوصول غير المصرح به.
-· قد نحتفظ بسجل المحادثات لفترة محدودة لتحسين البوت، ثم نقوم بحذفها أو إخفاء هويتها بشكل دائم.
-· رغم جهودنا، لا يمكن ضمان أمن البيانات بنسبة 100% عند نقلها عبر الإنترنت.
+                    <span class="section-title">7. حماية بياناتك وتخزينها</span>
 
-8. حقوقك
+                    <span class="list-item">نتخذ إجراءات أمنية معقولة لحماية بياناتك من الوصول غير المصرح به.</span>
+                    <span class="list-item">قد نحتفظ بسجل المحادثات لفترة محدودة لتحسين البوت، ثم نقوم بحذفها أو إخفاء هويتها بشكل دائم.</span>
+                    <span class="list-item">رغم جهودنا، لا يمكن ضمان أمن البيانات بنسبة 100% عند نقلها عبر الإنترنت.</span>
 
-لديك الحق في:
+                    <span class="section-title">8. حقوقك</span>
 
-· طلب حذف بياناتك: يمكنك التواصل معنا لطلب حذف معلوماتك المخزنة.
-· الانسحاب من نظام النقاط: يمكنك إلغاء المشاركة في نظام النقاط في أي وقت.
-· الوصول إلى بياناتك: يمكنك طلب نسخة من البيانات التي لدينا عنك.
+                    لديك الحق في:
 
-9. التواصل معنا
+                    <span class="list-item">طلب حذف بياناتك: يمكنك التواصل معنا لطلب حذف معلوماتك المخزنة.</span>
+                    <span class="list-item">الانسحاب من نظام النقاط: يمكنك إلغاء المشاركة في نظام النقاط في أي وقت.</span>
+                    <span class="list-item">الوصول إلى بياناتك: يمكنك طلب نسخة من البيانات التي لدينا عنك.</span>
 
-للاستفسارات حول هذه السياسة، أو لحذف بياناتك، أو للاعتراض على قرار حظر، يرجى التواصل معنا 
+                    <span class="section-title">9. التواصل معنا</span>
 
-10. التعديل على السياسة
+                    للاستفسارات حول هذه السياسة، أو لحذف بياناتك، أو للاعتراض على قرار حظر، يرجى التواصل معنا.
 
-قد نقوم بتحديث هذه السياسة من وقت لآخر. سنخطرك بأي تغييرات جوهرية عبر البوت أو صفحتنا على فيسبوك. استمرارك باستخدام البوت بعد التعديل يعني موافقتك على السياسة المحدثة.
+                    <span class="section-title">10. التعديل على السياسة</span>
 
-إشعار حقوق الملكية
-جميع المحتويات المنشورة على صفحة Chatbot من صور، فيديوهات، نصوص، وتصاميم مولدة بواسطة أدوات الذكاء الاصطناعي المملوكة للصفحة هي ملك فكري حصري لصفحة Chatbot.
-يُحظر إعادة نشرها أو استخدامها تجارياً بدون إذن خطي مسبق من إدارة الصفحة. © 2026</h6>
+                    قد نقوم بتحديث هذه السياسة من وقت لآخر. سنخطرك بأي تغييرات جوهرية عبر البوت أو صفحتنا على فيسبوك. استمرارك باستخدام البوت بعد التعديل يعني موافقتك على السياسة المحدثة.
 
-<h3>الإثنين 10 اغسطس 2026</h3>
+                    <span class="section-title">إشعار حقوق الملكية</span>
 
-<h3>جميع الحقوق محفوظه لهذا البوت</h3>
+                    جميع المحتويات المنشورة على صفحة Chatbot من صور، فيديوهات، نصوص، وتصاميم مولدة بواسطة أدوات الذكاء الاصطناعي المملوكة للصفحة هي ملك فكري حصري لصفحة Chatbot.
+                    يُحظر إعادة نشرها أو استخدامها تجارياً بدون إذن خطي مسبق من إدارة الصفحة. © 2026
+                </h6>
+
+                <h3>الإثنين 10 اغسطس 2026</h3>
+                <h3>جميع الحقوق محفوظه لهذا البوت</h3>
             </div>
 
             <div class="lang-english">
-                <h6>Privacy Policy for [Chatbot] Bot
+                <h6>
+                    <strong>Privacy Policy for [Chatbot] Bot</strong>
 
-Last updated: [Tuesday, July 28, 2026]
+                    <span class="section-title">Last updated: [Tuesday, July 28, 2026]</span>
 
-Welcome to [Chatbot] Bot. We are committed to protecting your privacy and ensuring transparency in handling your data. This policy explains how we collect, use, and protect your information when you interact with our bot via Facebook Messenger.
+                    Welcome to [Chatbot] Bot. We are committed to protecting your privacy and ensuring transparency in handling your data. This policy explains how we collect, use, and protect your information when you interact with our bot via Facebook Messenger.
 
-1. Information We Collect
+                    <span class="section-title">1. Information We Collect</span>
 
-When using the bot, we may collect:
+                    When using the bot, we may collect:
 
-· Basic information: Page-scoped user ID (PSID), and your public Facebook profile name.
-· Conversation content: Messages you send to the bot, questions you ask, and instructions you provide.
-· Interaction data: Your points history, conversation timestamps, and usage frequency.
+                    <span class="list-item">Basic information: Page-scoped user ID (PSID), and your public Facebook profile name.</span>
+                    <span class="list-item">Conversation content: Messages you send to the bot, questions you ask, and instructions you provide.</span>
+                    <span class="list-item">Interaction data: Your points history, conversation timestamps, and usage frequency.</span>
 
-2. How We Use Your Information
+                    <span class="section-title">2. How We Use Your Information</span>
 
-We use the data we collect for the following purposes:
+                    We use the data we collect for the following purposes:
 
-· Operating and improving the bot: To provide accurate responses and analyze conversation patterns to enhance performance.
-· Personalizing experience: To remember your preferences and past conversations for smoother interaction.
-· Managing the points system: To track your points, update your balance, and grant rewards that increase your speaking opportunities.
-· Quality monitoring and compliance: To ensure adherence to our usage policy and detect any misuse or violations.
+                    <span class="list-item">Operating and improving the bot: To provide accurate responses and analyze conversation patterns to enhance performance.</span>
+                    <span class="list-item">Personalizing experience: To remember your preferences and past conversations for smoother interaction.</span>
+                    <span class="list-item">Managing the points system: To track your points, update your balance, and grant rewards that increase your speaking opportunities.</span>
+                    <span class="list-item">Quality monitoring and compliance: To ensure adherence to our usage policy and detect any misuse or violations.</span>
 
-3. Human-like Behavior Simulation
+                    <span class="section-title">3. Human-like Behavior Simulation</span>
 
-[Chatbot] Bot uses AI technologies designed to simulate human conversation. This means:
+                    [Chatbot] Bot uses AI technologies designed to simulate human conversation. This means:
 
-· The bot is not human; it is a program aimed at making your interaction natural and smooth.
-· Your inputs are analyzed to generate human-like replies, but all responses are generated automatically.
-· Although we strive to provide a human-like experience, the bot should not be considered a substitute for professional advice in sensitive matters (e.g., health or legal).
+                    <span class="list-item">The bot is not human; it is a program aimed at making your interaction natural and smooth.</span>
+                    <span class="list-item">Your inputs are analyzed to generate human-like replies, but all responses are generated automatically.</span>
+                    <span class="list-item">Although we strive to provide a human-like experience, the bot should not be considered a substitute for professional advice in sensitive matters (e.g., health or legal).</span>
 
-4. Points System and Increased Speaking Chances
+                    <span class="section-title">4. Points System and Increased Speaking Chances</span>
 
-Our bot has a points system to encourage interaction:
+                    Our bot has a points system to encourage interaction:
 
-· Earning points: You can earn points by interacting with the bot, completing specific tasks, or participating in activities announced by the bot.
-· Using points: Points give you additional benefits, such as higher reply priority, exclusive content, or longer conversation sessions.
-· Note: Points have no monetary value and cannot be exchanged for real money. They are tied to your account and are non-transferable.
+                    <span class="list-item">Earning points: You can earn points by interacting with the bot, completing specific tasks, or participating in activities announced by the bot.</span>
+                    <span class="list-item">Using points: Points give you additional benefits, such as higher reply priority, exclusive content, or longer conversation sessions.</span>
+                    <span class="list-item">Note: Points have no monetary value and cannot be exchanged for real money. They are tied to your account and are non-transferable.</span>
 
-5. Ban and Service Termination
+                    <span class="section-title">5. Ban and Service Termination</span>
 
-To ensure a safe and respectful environment, we reserve the right to temporarily or permanently ban any user in the following cases:
+                    To ensure a safe and respectful environment, we reserve the right to temporarily or permanently ban any user in the following cases:
 
-· Misuse: Using offensive language, harassment, or attempting to hack the bot.
-· Violation of terms: Attempting to manipulate the points system or using the bot for illegal purposes.
-· Excessive requests: Sending a large volume of messages to disrupt the service (known as flooding attacks).
-If your account is banned, you may lose your points and access to the bot. You may contact us to appeal the ban decision.
+                    <span class="list-item">Misuse: Using offensive language, harassment, or attempting to hack the bot.</span>
+                    <span class="list-item">Violation of terms: Attempting to manipulate the points system or using the bot for illegal purposes.</span>
+                    <span class="list-item">Excessive requests: Sending a large volume of messages to disrupt the service (known as flooding attacks).</span>
 
-6. Data Sharing with Third Parties
+                    If your account is banned, you may lose your points and access to the bot. You may contact us to appeal the ban decision.
 
-· We do not sell your personal information or conversations to any third party.
-· We may share aggregated and non-identifiable data (e.g., usage statistics) with technical partners to improve the bot.
-· Since the bot operates on Facebook Messenger, Meta's privacy policy also applies to your interaction, and Meta may use interaction data for its purposes (e.g., improving ads) in accordance with its policies.
+                    <span class="section-title">6. Data Sharing with Third Parties</span>
 
-7. Data Protection and Storage
+                    <span class="list-item">We do not sell your personal information or conversations to any third party.</span>
+                    <span class="list-item">We may share aggregated and non-identifiable data (e.g., usage statistics) with technical partners to improve the bot.</span>
+                    <span class="list-item">Since the bot operates on Facebook Messenger, Meta's privacy policy also applies to your interaction, and Meta may use interaction data for its purposes (e.g., improving ads) in accordance with its policies.</span>
 
-· We implement reasonable security measures to protect your data from unauthorized access.
-· We may retain conversation logs for a limited period to improve the bot, then delete or permanently anonymize them.
-· Despite our efforts, we cannot guarantee 100% data security during transmission over the internet.
+                    <span class="section-title">7. Data Protection and Storage</span>
 
-8. Your Rights
+                    <span class="list-item">We implement reasonable security measures to protect your data from unauthorized access.</span>
+                    <span class="list-item">We may retain conversation logs for a limited period to improve the bot, then delete or permanently anonymize them.</span>
+                    <span class="list-item">Despite our efforts, we cannot guarantee 100% data security during transmission over the internet.</span>
 
-You have the right to:
+                    <span class="section-title">8. Your Rights</span>
 
-· Request deletion of your data: Contact us to request deletion of your stored information.
-· Opt out of the points system: You can withdraw from the points system at any time.
-· Access your data: Request a copy of the data we hold about you.
+                    You have the right to:
 
-9. Contact Us
+                    <span class="list-item">Request deletion of your data: Contact us to request deletion of your stored information.</span>
+                    <span class="list-item">Opt out of the points system: You can withdraw from the points system at any time.</span>
+                    <span class="list-item">Access your data: Request a copy of the data we hold about you.</span>
 
-For inquiries about this policy, to delete your data, or to appeal a ban, please contact us.
+                    <span class="section-title">9. Contact Us</span>
 
-10. Policy Amendments
+                    For inquiries about this policy, to delete your data, or to appeal a ban, please contact us.
 
-We may update this policy from time to time. We will notify you of any material changes via the bot or our Facebook page. Continued use of the bot after the amendment constitutes your acceptance of the updated policy.
+                    <span class="section-title">10. Policy Amendments</span>
 
-Copyright Notice
-All content published on the Chatbot page – including images, videos, texts, and designs generated by AI tools owned by the page – is the exclusive intellectual property of the Chatbot page.
-Commercial republication or use without prior written permission from the page administration is prohibited. © 2026</h6>
+                    We may update this policy from time to time. We will notify you of any material changes via the bot or our Facebook page. Continued use of the bot after the amendment constitutes your acceptance of the updated policy.
 
-<h3>Monday, August 10, 2026</h3>
+                    <span class="section-title">Copyright Notice</span>
 
-<h3>All rights reserved for this bot</h3>
+                    All content published on the Chatbot page – including images, videos, texts, and designs generated by AI tools owned by the page – is the exclusive intellectual property of the Chatbot page.
+                    Commercial republication or use without prior written permission from the page administration is prohibited. © 2026
+                </h6>
+
+                <h3>Monday, August 10, 2026</h3>
+                <h3>All rights reserved for this bot</h3>
             </div>
         </div>
 
@@ -688,7 +711,6 @@ Commercial republication or use without prior written permission from the page a
         (function() {
             'use strict';
 
-            // ===== العناصر =====
             const readBtn = document.getElementById('readAloudBtn');
             const translateBtn = document.getElementById('translateBtn');
             const policyDiv = document.getElementById('policyText');
@@ -701,7 +723,6 @@ Commercial republication or use without prior written permission from the page a
 
             const supportsSpeech = 'speechSynthesis' in window;
 
-            // ===== دوال مساعدة =====
             function getCurrentText() {
                 const arabic = policyDiv.querySelector('.lang-arabic');
                 const english = policyDiv.querySelector('.lang-english');
@@ -715,14 +736,12 @@ Commercial republication or use without prior written permission from the page a
                 return /[\u0600-\u06FF]/.test(text) ? 'ar-SA' : 'en-US';
             }
 
-            // ===== وظيفة القراءة (تشغيل أو إيقاف) =====
             function speakText() {
                 if (!supportsSpeech) {
                     alert('متصفحك لا يدعم قراءة النص صوتياً.');
                     return;
                 }
 
-                // إذا كان يقرأ حالياً، نوقف
                 if (isReading) {
                     window.speechSynthesis.cancel();
                     isReading = false;
@@ -772,9 +791,7 @@ Commercial republication or use without prior written permission from the page a
                 window.speechSynthesis.speak(utterance);
             }
 
-            // ===== وظيفة الترجمة (تبديل اللغة + تشغيل الصوت تلقائياً) =====
             function toggleTranslationAndSpeak() {
-                // عكس الحالة
                 isEnglish = !isEnglish;
                 if (isEnglish) {
                     policyDiv.classList.add('show-english');
@@ -784,7 +801,6 @@ Commercial republication or use without prior written permission from the page a
                     translateBtn.setAttribute('aria-label', 'ترجمة إلى الإنجليزية مع القراءة الصوتية');
                 }
 
-                // إيقاف أي قراءة حالية
                 if (isReading) {
                     window.speechSynthesis.cancel();
                     isReading = false;
@@ -792,28 +808,23 @@ Commercial republication or use without prior written permission from the page a
                         `<svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
                 }
 
-                // تشغيل القراءة تلقائياً بعد تبديل اللغة (مع تأخير بسيط لضمان تحديث DOM)
                 setTimeout(function() {
-                    speakText(); // سيقرأ النص الجديد تلقائياً
+                    speakText();
                 }, 100);
             }
 
-            // ===== ربط الأحداث =====
-            // زر القراءة (يعمل كالمعتاد)
             readBtn.addEventListener('click', speakText);
             readBtn.addEventListener('touchstart', function(e) {
                 e.preventDefault();
                 speakText();
             }, { passive: false });
 
-            // زر الترجمة (يبدل اللغة ويقرأ تلقائياً)
             translateBtn.addEventListener('click', toggleTranslationAndSpeak);
             translateBtn.addEventListener('touchstart', function(e) {
                 e.preventDefault();
                 toggleTranslationAndSpeak();
             }, { passive: false });
 
-            // تحميل الأصوات مسبقاً
             if (supportsSpeech) {
                 window.speechSynthesis.getVoices();
                 window.speechSynthesis.onvoiceschanged = function() {
@@ -821,7 +832,6 @@ Commercial republication or use without prior written permission from the page a
                 };
             }
 
-            // إلغاء القراءة عند مغادرة الصفحة
             window.addEventListener('beforeunload', function() {
                 if (isReading) {
                     window.speechSynthesis.cancel();
