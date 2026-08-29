@@ -1,5 +1,3 @@
-
-<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8" />
@@ -30,7 +28,6 @@
             margin: 0;
         }
 
-        /* البطاقة الزجاجية – خلفية شفافة مع blur */
         .glass-card {
             max-width: 850px;
             width: 100%;
@@ -42,7 +39,6 @@
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.8);
             padding: 28px 24px 24px;
             color: #0f172a;
-            transition: all 0.2s ease;
             position: relative;
             overflow: hidden;
         }
@@ -58,7 +54,6 @@
             pointer-events: none;
         }
 
-        /* حاوية الصورة الرمزية مع شبكة عصبية ثلاثية الأبعاد */
         .avatar-wrapper {
             position: relative;
             width: 80px;
@@ -66,7 +61,6 @@
             flex-shrink: 0;
             border-radius: 50%;
             overflow: visible;
-            /* لإظهار الشبكة خارج الإطار */
         }
 
         .avatar-wrapper canvas {
@@ -93,7 +87,6 @@
             object-fit: cover;
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
             display: block;
             margin: 5px;
         }
@@ -116,7 +109,6 @@
         .header-text h1 {
             font-size: clamp(1.3rem, 5vw, 1.8rem);
             font-weight: 700;
-            letter-spacing: 0.3px;
             color: #0f172a;
             margin: 0;
             line-height: 1.2;
@@ -125,19 +117,16 @@
         .header-text .sub-date {
             font-size: clamp(0.75rem, 2vw, 0.95rem);
             opacity: 0.6;
-            font-weight: 400;
             margin-top: 2px;
             color: #334155;
         }
 
-        /* شارة ✦ AI بالزجاج */
         .ai-badge {
             display: flex;
             align-items: center;
             gap: 6px;
             background: rgba(255, 255, 255, 0.35);
             backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.6);
             border-radius: 40px;
             padding: 4px 14px 4px 10px;
@@ -152,10 +141,8 @@
         .ai-badge i {
             font-size: 0.8rem;
             color: #2563eb;
-            filter: drop-shadow(0 0 4px rgba(37, 99, 235, 0.2));
         }
 
-        /* أزرار الصوت والترجمة */
         .action-buttons {
             display: flex;
             gap: 8px;
@@ -167,13 +154,11 @@
         .translate-btn {
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.7);
             color: #1e293b;
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            font-size: 1.2rem;
             cursor: pointer;
             transition: 0.2s ease;
             display: flex;
@@ -182,7 +167,6 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
             touch-action: manipulation;
             user-select: none;
-            -webkit-user-select: none;
         }
         .read-btn:active,
         .translate-btn:active {
@@ -198,7 +182,6 @@
             color: #2563eb;
         }
 
-        /* محتوى السياسة */
         .policy-content {
             position: relative;
             z-index: 1;
@@ -207,8 +190,7 @@
             font-size: clamp(0.9rem, 2.2vw, 1rem);
             max-height: 65vh;
             overflow-y: auto;
-            padding-left: 4px;
-            padding-right: 4px;
+            padding: 0 4px;
             -webkit-overflow-scrolling: touch;
             scroll-behavior: smooth;
             color: #0f172a;
@@ -262,7 +244,6 @@
             margin: 0.4em 0;
         }
 
-        /* زر البريد الإلكتروني */
         .footer-actions {
             display: flex;
             justify-content: center;
@@ -277,7 +258,6 @@
             gap: 10px;
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.7);
             padding: 14px 24px;
             border-radius: 60px;
@@ -287,11 +267,9 @@
             text-decoration: none;
             transition: 0.2s ease;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
-            letter-spacing: 0.2px;
             text-align: center;
             touch-action: manipulation;
             user-select: none;
-            -webkit-user-select: none;
             width: 100%;
             justify-content: center;
             max-width: 400px;
@@ -310,7 +288,6 @@
             font-weight: 400;
         }
 
-        /* responsive */
         @media (max-width: 480px) {
             body {
                 padding: 10px;
@@ -373,9 +350,8 @@
 <body>
     <div class="glass-card">
 
-        <!-- الملف الشخصي مع شارة ✦ AI وزر الترجمة -->
+        <!-- الملف الشخصي مع شارة ✦ AI -->
         <div class="profile-section">
-            <!-- حاوية الصورة الرمزية مع شبكة عصبية -->
             <div class="avatar-wrapper" id="avatarWrapper">
                 <img class="profile-avatar" src="bfd8c880-8807-11f1-8108-b3a8e4e1fe89.png" alt="شعار البوت" loading="lazy" onerror="this.style.display='none'" />
             </div>
@@ -385,12 +361,10 @@
                 <div class="sub-date">الإثنين 10 اغسطس 2026</div>
             </div>
 
-            <!-- شارة ✦ AI بالزجاج -->
             <div class="ai-badge">
                 <i class="fas fa-star"></i> ✦ AI
             </div>
 
-            <!-- أزرار الصوت والترجمة -->
             <div class="action-buttons">
                 <button class="read-btn" id="readAloudBtn" type="button" aria-label="قراءة النص بصوت">
                     <svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
@@ -401,7 +375,7 @@
             </div>
         </div>
 
-        <!-- محتوى السياسة (عربي + إنجليزي) -->
+        <!-- محتوى السياسة -->
         <div class="policy-content" id="policyText">
             <div class="lang-arabic">
                 <h6>سياسة الخصوصية لبوت [Chatbot]
@@ -548,4 +522,26 @@ If your account is banned, you may lose your points and access to the bot. You m
 
 · We implement reasonable security measures to protect your data from unauthorized access.
 · We may retain conversation logs for a limited period to improve the bot, then delete or permanently anonymize them.
-· Despite our efforts, we cannot guarantee 100% data security during tr
+· Despite our efforts, we cannot guarantee 100% data security during transmission over the internet.
+
+8. Your Rights
+
+You have the right to:
+
+· Request deletion of your data: Contact us to request deletion of your stored information.
+· Opt out of the points system: You can withdraw from the points system at any time.
+· Access your data: Request a copy of the data we hold about you.
+
+9. Contact Us
+
+For inquiries about this policy, to delete your data, or to appeal a ban, please contact us.
+
+10. Policy Amendments
+
+We may update this policy from time to time. We will notify you of any material changes via the bot or our Facebook page. Continued use of the bot after the amendment constitutes your acceptance of the updated policy.
+
+Copyright Notice
+All content published on the Chatbot page – including images, videos, texts, and designs generated by AI tools owned by the page – is the exclusive intellectual property of the Chatbot page.
+Commercial republication or use without prior written permission from the page administration is prohibited. © 2026</h6>
+
+<h3>Monday, August 10, 202
