@@ -1,3 +1,5 @@
+
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8" />
@@ -7,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
-    <!-- Font Awesome 6 (مجانية) -->
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
@@ -23,7 +25,7 @@
             justify-content: center;
             align-items: center;
             font-family: 'Tajawal', 'Segoe UI', system-ui, sans-serif;
-            background: #f5f7fa; /* خلفية بيضاء ناعمة */
+            background: #f5f7fa;
             padding: 16px;
             margin: 0;
         }
@@ -56,7 +58,46 @@
             pointer-events: none;
         }
 
-        /* الملف الشخصي */
+        /* حاوية الصورة الرمزية مع شبكة عصبية ثلاثية الأبعاد */
+        .avatar-wrapper {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            overflow: visible;
+            /* لإظهار الشبكة خارج الإطار */
+        }
+
+        .avatar-wrapper canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            pointer-events: none;
+            z-index: 0;
+            border-radius: 50%;
+            opacity: 0.85;
+        }
+
+        .profile-avatar {
+            position: relative;
+            z-index: 1;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+            object-fit: cover;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            display: block;
+            margin: 5px;
+        }
+
         .profile-section {
             display: flex;
             align-items: center;
@@ -65,18 +106,6 @@
             position: relative;
             z-index: 1;
             flex-wrap: wrap;
-        }
-
-        .profile-avatar {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            object-fit: cover;
-            background: #e2e8f0;
-            flex-shrink: 0;
-            max-width: 70px;
         }
 
         .header-text {
@@ -101,29 +130,32 @@
             color: #334155;
         }
 
-        /* شارة AI تحت البروفايل (بجانب الزر) */
+        /* شارة ✦ AI بالزجاج */
         .ai-badge {
             display: flex;
             align-items: center;
             gap: 6px;
-            background: rgba(59, 130, 246, 0.12);
-            border: 1px solid rgba(59, 130, 246, 0.25);
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
             border-radius: 40px;
             padding: 4px 14px 4px 10px;
             font-size: 0.85rem;
-            font-weight: 500;
-            color: #2563eb;
-            backdrop-filter: blur(4px);
+            font-weight: 600;
+            color: #1e40af;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
             white-space: nowrap;
             margin-right: auto;
             margin-left: 8px;
         }
         .ai-badge i {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: #2563eb;
+            filter: drop-shadow(0 0 4px rgba(37, 99, 235, 0.2));
         }
 
-        /* زر الصوت + زر الترجمة */
+        /* أزرار الصوت والترجمة */
         .action-buttons {
             display: flex;
             gap: 8px;
@@ -131,31 +163,34 @@
             flex-shrink: 0;
         }
 
-        .read-btn, .translate-btn {
-            background: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+        .read-btn,
+        .translate-btn {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
             color: #1e293b;
             width: 48px;
             height: 48px;
             border-radius: 50%;
             font-size: 1.2rem;
             cursor: pointer;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
             transition: 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
             touch-action: manipulation;
             user-select: none;
             -webkit-user-select: none;
         }
-        .read-btn:active, .translate-btn:active {
+        .read-btn:active,
+        .translate-btn:active {
             transform: scale(0.92);
             background: rgba(255, 255, 255, 0.8);
         }
-        .read-btn svg, .translate-btn i {
+        .read-btn svg,
+        .translate-btn i {
             pointer-events: none;
             font-size: 1.4rem;
         }
@@ -163,7 +198,7 @@
             color: #2563eb;
         }
 
-        /* محتوى السياسة – يحتوي على نسختين (عربي/إنجليزي) */
+        /* محتوى السياسة */
         .policy-content {
             position: relative;
             z-index: 1;
@@ -189,7 +224,6 @@
             border-radius: 10px;
         }
 
-        /* النصوص داخل المحتوى */
         .policy-content .lang-arabic,
         .policy-content .lang-english {
             transition: opacity 0.3s ease;
@@ -241,10 +275,10 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.7);
             padding: 14px 24px;
             border-radius: 60px;
             color: #0f172a;
@@ -252,7 +286,7 @@
             font-weight: 500;
             text-decoration: none;
             transition: 0.2s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
             letter-spacing: 0.2px;
             text-align: center;
             touch-action: manipulation;
@@ -264,7 +298,7 @@
         }
         .email-btn:active {
             transform: scale(0.97);
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.8);
         }
         .email-btn i {
             font-size: 1.2rem;
@@ -276,7 +310,7 @@
             font-weight: 400;
         }
 
-        /* تحسين للشاشات الصغيرة */
+        /* responsive */
         @media (max-width: 480px) {
             body {
                 padding: 10px;
@@ -285,12 +319,20 @@
                 padding: 20px 16px 18px;
                 border-radius: 28px;
             }
+            .avatar-wrapper {
+                width: 64px;
+                height: 64px;
+            }
+            .avatar-wrapper canvas {
+                width: 100px;
+                height: 100px;
+            }
             .profile-avatar {
                 width: 56px;
                 height: 56px;
-                max-width: 56px;
             }
-            .read-btn, .translate-btn {
+            .read-btn,
+            .translate-btn {
                 width: 42px;
                 height: 42px;
             }
@@ -320,7 +362,8 @@
             .header-text h1 {
                 font-size: 1.1rem;
             }
-            .read-btn, .translate-btn {
+            .read-btn,
+            .translate-btn {
                 width: 38px;
                 height: 38px;
             }
@@ -330,21 +373,19 @@
 <body>
     <div class="glass-card">
 
-        <!-- الملف الشخصي مع شارة AI وزر الترجمة -->
+        <!-- الملف الشخصي مع شارة ✦ AI وزر الترجمة -->
         <div class="profile-section">
-            <img 
-                class="profile-avatar" 
-                src="bfd8c880-8807-11f1-8108-b3a8e4e1fe89.png" 
-                alt="شعار البوت" 
-                loading="lazy"
-                onerror="this.style.display='none'"
-            />
+            <!-- حاوية الصورة الرمزية مع شبكة عصبية -->
+            <div class="avatar-wrapper" id="avatarWrapper">
+                <img class="profile-avatar" src="bfd8c880-8807-11f1-8108-b3a8e4e1fe89.png" alt="شعار البوت" loading="lazy" onerror="this.style.display='none'" />
+            </div>
+
             <div class="header-text">
                 <h1>سياسات والخصوصية شات بوت</h1>
                 <div class="sub-date">الإثنين 10 اغسطس 2026</div>
             </div>
 
-            <!-- شارة ✦ AI (بالأزرق) -->
+            <!-- شارة ✦ AI بالزجاج -->
             <div class="ai-badge">
                 <i class="fas fa-star"></i> ✦ AI
             </div>
@@ -360,9 +401,8 @@
             </div>
         </div>
 
-        <!-- محتوى السياسة (نسختين: عربي وإنجليزي) -->
+        <!-- محتوى السياسة (عربي + إنجليزي) -->
         <div class="policy-content" id="policyText">
-            <!-- النص العربي (الأصلي) -->
             <div class="lang-arabic">
                 <h6>سياسة الخصوصية لبوت [Chatbot]
 
@@ -449,7 +489,6 @@
 <h3>جميع الحقوق محفوظه لهذا البوت</h3>
             </div>
 
-            <!-- النص الإنجليزي (مترجم) -->
             <div class="lang-english">
                 <h6>Privacy Policy for [Chatbot] Bot
 
@@ -509,163 +548,4 @@ If your account is banned, you may lose your points and access to the bot. You m
 
 · We implement reasonable security measures to protect your data from unauthorized access.
 · We may retain conversation logs for a limited period to improve the bot, then delete or permanently anonymize them.
-· Despite our efforts, we cannot guarantee 100% data security during transmission over the internet.
-
-8. Your Rights
-
-You have the right to:
-
-· Request deletion of your data: Contact us to request deletion of your stored information.
-· Opt out of the points system: You can withdraw from the points system at any time.
-· Access your data: Request a copy of the data we hold about you.
-
-9. Contact Us
-
-For inquiries about this policy, to delete your data, or to appeal a ban, please contact us.
-
-10. Policy Amendments
-
-We may update this policy from time to time. We will notify you of any material changes via the bot or our Facebook page. Continued use of the bot after the amendment constitutes your acceptance of the updated policy.
-
-Copyright Notice
-All content published on the Chatbot page – including images, videos, texts, and designs generated by AI tools owned by the page – is the exclusive intellectual property of the Chatbot page.
-Commercial republication or use without prior written permission from the page administration is prohibited. © 2026</h6>
-
-<h3>Monday, August 10, 2026</h3>
-
-<h3>All rights reserved for this bot</h3>
-            </div>
-        </div>
-
-        <!-- زر البريد الإلكتروني -->
-        <div class="footer-actions">
-            <a href="mailto:contactchatbot1@gmail.com" class="email-btn">
-                <i class="fas fa-envelope"></i>
-                <span>للتواصل مع المطور اضغط لتواصل عبر بريد الكتروني</span>
-            </a>
-        </div>
-
-    </div>
-
-    <script>
-        (function() {
-            // قراءة النص
-            const readBtn = document.getElementById('readAloudBtn');
-            const policyDiv = document.getElementById('policyText');
-            let isReading = false;
-            let utterance = null;
-
-            // الترجمة
-            const translateBtn = document.getElementById('translateBtn');
-            let isEnglish = false;
-
-            // دعم Speech Synthesis
-            const supportsSpeech = 'speechSynthesis' in window;
-
-            function getCurrentText() {
-                // نأخذ النص المعروض حالياً (العربي أو الإنجليزي)
-                const arabic = policyDiv.querySelector('.lang-arabic');
-                const english = policyDiv.querySelector('.lang-english');
-                if (arabic && english) {
-                    if (policyDiv.classList.contains('show-english')) {
-                        return english.innerText;
-                    } else {
-                        return arabic.innerText;
-                    }
-                }
-                return policyDiv.innerText;
-            }
-
-            function speakText() {
-                if (!supportsSpeech) {
-                    alert('متصفحك لا يدعم خاصية قراءة النص صوتياً.');
-                    return;
-                }
-
-                if (isReading) {
-                    window.speechSynthesis.cancel();
-                    isReading = false;
-                    readBtn.innerHTML = `<svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
-                    return;
-                }
-
-                const text = getCurrentText().trim();
-                if (!text) return;
-
-                utterance = new SpeechSynthesisUtterance(text);
-                // تحديد اللغة حسب النص المعروض
-                if (policyDiv.classList.contains('show-english')) {
-                    utterance.lang = 'en-US';
-                } else {
-                    utterance.lang = 'ar-SA';
-                }
-                utterance.rate = 0.9;
-                utterance.pitch = 1;
-                utterance.volume = 1;
-
-                utterance.onstart = function() {
-                    isReading = true;
-                    readBtn.innerHTML = `<svg viewBox="0 0 24 24" width="26" height="26"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
-                };
-
-                utterance.onend = function() {
-                    isReading = false;
-                    readBtn.innerHTML = `<svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
-                };
-
-                utterance.onerror = function(event) {
-                    isReading = false;
-                    readBtn.innerHTML = `<svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
-                    if (event.error !== 'canceled') {
-                        console.warn('Speech error:', event.error);
-                    }
-                };
-
-                window.speechSynthesis.speak(utterance);
-            }
-
-            // تبديل الترجمة
-            function toggleTranslation() {
-                isEnglish = !isEnglish;
-                if (isEnglish) {
-                    policyDiv.classList.add('show-english');
-                    translateBtn.innerHTML = '<i class="fas fa-language" style="color:#2563eb;"></i>';
-                    // تغيير النص التعريفي للزر
-                    translateBtn.setAttribute('aria-label', 'عرض النص العربي');
-                } else {
-                    policyDiv.classList.remove('show-english');
-                    translateBtn.innerHTML = '<i class="fas fa-language" style="color:#2563eb;"></i>';
-                    translateBtn.setAttribute('aria-label', 'ترجمة إلى الإنجليزية');
-                }
-                // إيقاف القراءة الحالية إن وجدت
-                if (isReading) {
-                    window.speechSynthesis.cancel();
-                    isReading = false;
-                    readBtn.innerHTML = `<svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
-                }
-            }
-
-            // أحداث
-            readBtn.addEventListener('click', speakText);
-            readBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                speakText();
-            }, { passive: false });
-
-            translateBtn.addEventListener('click', toggleTranslation);
-            translateBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                toggleTranslation();
-            }, { passive: false });
-
-            // إلغاء القراءة عند مغادرة الصفحة
-            window.addEventListener('beforeunload', function() {
-                if (isReading) {
-                    window.speechSynthesis.cancel();
-                }
-            });
-
-        })();
-    </script>
-</body>
-</html>
+· Despite our efforts, we cannot guarantee 100% data security during tr
