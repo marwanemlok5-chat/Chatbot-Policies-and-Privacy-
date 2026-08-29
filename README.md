@@ -1,16 +1,14 @@
-<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>سياسة الخصوصية - شات بوت</title>
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
-    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
+        /* === كل الأنماط السابقة مع إضافة تنسيق النجوم === */
         * {
             margin: 0;
             padding: 0;
@@ -55,22 +53,57 @@
             pointer-events: none;
         }
 
+        /* === حاوية الصورة مع النجوم === */
         .avatar-wrapper {
             position: relative;
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             flex-shrink: 0;
             border-radius: 50%;
-            overflow: visible;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* النجوم الخمسة حول الصورة */
+        .star-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .star-ring .star {
+            position: absolute;
+            font-size: 1.5rem;
+            color: #2563eb;
+            text-shadow: 0 0 12px rgba(37, 99, 235, 0.6);
+            animation: twinkle 2.5s infinite alternate ease-in-out;
+            transform-origin: center;
+            line-height: 1;
+        }
+        /* توزيع النجوم بزوايا 0, 72, 144, 216, 288 درجة */
+        .star-ring .star:nth-child(1) { top: -8px; left: 50%; transform: translateX(-50%); }
+        .star-ring .star:nth-child(2) { top: 18%; right: -8px; transform: translateY(-50%); }
+        .star-ring .star:nth-child(3) { bottom: -8px; left: 50%; transform: translateX(-50%); }
+        .star-ring .star:nth-child(4) { bottom: 18%; left: -8px; transform: translateY(50%); }
+        .star-ring .star:nth-child(5) { top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.3); opacity: 0.3; } /* نجم مركزي خفيف */
+
+        @keyframes twinkle {
+            0% { opacity: 0.6; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* canvas الشبكة العصبية */
         .avatar-wrapper canvas {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             pointer-events: none;
             z-index: 0;
             border-radius: 50%;
@@ -89,9 +122,9 @@
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(4px);
             display: block;
-            margin: 5px;
         }
 
+        /* باقي الأنماط كما هي */
         .profile-section {
             display: flex;
             align-items: center;
@@ -290,70 +323,42 @@
         }
 
         @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            .glass-card {
-                padding: 20px 16px 18px;
-                border-radius: 28px;
-            }
-            .avatar-wrapper {
-                width: 64px;
-                height: 64px;
-            }
-            .avatar-wrapper canvas {
-                width: 100px;
-                height: 100px;
-            }
-            .profile-avatar {
-                width: 56px;
-                height: 56px;
-            }
-            .read-btn,
-            .translate-btn {
-                width: 42px;
-                height: 42px;
-            }
-            .read-btn svg {
-                width: 22px;
-                height: 22px;
-            }
-            .ai-badge {
-                font-size: 0.7rem;
-                padding: 2px 10px 2px 8px;
-            }
-            .email-btn {
-                padding: 12px 18px;
-                font-size: 0.85rem;
-                gap: 8px;
-            }
-            .policy-content {
-                max-height: 60vh;
-                font-size: 0.85rem;
-            }
+            body { padding: 10px; }
+            .glass-card { padding: 20px 16px 18px; border-radius: 28px; }
+            .avatar-wrapper { width: 76px; height: 76px; }
+            .avatar-wrapper canvas { width: 110px; height: 110px; }
+            .profile-avatar { width: 56px; height: 56px; }
+            .star-ring .star { font-size: 1.2rem; }
+            .read-btn, .translate-btn { width: 42px; height: 42px; }
+            .read-btn svg { width: 22px; height: 22px; }
+            .ai-badge { font-size: 0.7rem; padding: 2px 10px 2px 8px; }
+            .email-btn { padding: 12px 18px; font-size: 0.85rem; gap: 8px; }
+            .policy-content { max-height: 60vh; font-size: 0.85rem; }
         }
 
         @media (max-width: 380px) {
-            .profile-section {
-                gap: 10px;
-            }
-            .header-text h1 {
-                font-size: 1.1rem;
-            }
-            .read-btn,
-            .translate-btn {
-                width: 38px;
-                height: 38px;
-            }
+            .profile-section { gap: 10px; }
+            .header-text h1 { font-size: 1.1rem; }
+            .read-btn, .translate-btn { width: 38px; height: 38px; }
+            .star-ring .star { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
     <div class="glass-card">
 
-        <!-- الملف الشخصي مع شارة ✦ AI -->
+        <!-- الملف الشخصي مع شارة ✦ AI ونجوم تلتف حول الصورة -->
         <div class="profile-section">
             <div class="avatar-wrapper" id="avatarWrapper">
+                <!-- حلقة النجوم الخمسة -->
+                <div class="star-ring">
+                    <span class="star">✦</span>
+                    <span class="star">✦</span>
+                    <span class="star">✦</span>
+                    <span class="star">✦</span>
+                    <span class="star">✦</span>
+                </div>
+                <!-- صورة الملف الشخصي -->
                 <img class="profile-avatar" src="bfd8c880-8807-11f1-8108-b3a8e4e1fe89.png" alt="شعار البوت" loading="lazy" onerror="this.style.display='none'" />
             </div>
 
@@ -370,13 +375,13 @@
                 <button class="read-btn" id="readAloudBtn" type="button" aria-label="قراءة النص بصوت">
                     <svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
                 </button>
-                <button class="translate-btn" id="translateBtn" type="button" aria-label="ترجمة إلى الإنجليزية">
+                <button class="translate-btn" id="translateBtn" type="button" aria-label="ترجمة إلى الإنجليزية مع القراءة الصوتية">
                     <i class="fas fa-language"></i>
                 </button>
             </div>
         </div>
 
-        <!-- محتوى السياسة -->
+        <!-- محتوى السياسة (بدون تغيير) -->
         <div class="policy-content" id="policyText">
             <div class="lang-arabic">
                 <h6>سياسة الخصوصية لبوت [Chatbot]
@@ -561,7 +566,7 @@ Commercial republication or use without prior written permission from the page a
 
     </div>
 
-    <!-- Three.js للشبكة العصبية (مع try-catch) -->
+    <!-- Three.js للشبكة العصبية -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">
     </script>
     <script>
@@ -573,8 +578,8 @@ Commercial republication or use without prior written permission from the page a
                 const canvas = document.createElement('canvas');
                 canvas.width = 160;
                 canvas.height = 160;
-                canvas.style.width = '120px';
-                canvas.style.height = '120px';
+                canvas.style.width = '130px';
+                canvas.style.height = '130px';
                 canvas.style.position = 'absolute';
                 canvas.style.top = '50%';
                 canvas.style.left = '50%';
@@ -683,24 +688,20 @@ Commercial republication or use without prior written permission from the page a
         (function() {
             'use strict';
 
-            // ========== العناصر ==========
+            // ===== العناصر =====
             const readBtn = document.getElementById('readAloudBtn');
             const translateBtn = document.getElementById('translateBtn');
             const policyDiv = document.getElementById('policyText');
 
-            if (!readBtn || !translateBtn || !policyDiv) {
-                console.warn('بعض العناصر غير موجودة');
-                return;
-            }
+            if (!readBtn || !translateBtn || !policyDiv) return;
 
-            // ========== متغيرات الحالة ==========
             let isReading = false;
             let utterance = null;
-            let isEnglish = false; // false = عرض العربي, true = عرض الإنجليزي
+            let isEnglish = false;
 
             const supportsSpeech = 'speechSynthesis' in window;
 
-            // ========== دوال مساعدة ==========
+            // ===== دوال مساعدة =====
             function getCurrentText() {
                 const arabic = policyDiv.querySelector('.lang-arabic');
                 const english = policyDiv.querySelector('.lang-english');
@@ -710,17 +711,11 @@ Commercial republication or use without prior written permission from the page a
                 return policyDiv.innerText;
             }
 
-            // كشف اللغة (نظام بسيط)
             function detectLanguage(text) {
-                // إذا احتوى على أحرف عربية
-                if (/[\u0600-\u06FF]/.test(text)) {
-                    return 'ar-SA';
-                } else {
-                    return 'en-US';
-                }
+                return /[\u0600-\u06FF]/.test(text) ? 'ar-SA' : 'en-US';
             }
 
-            // ========== وظيفة القراءة الصوتية ==========
+            // ===== وظيفة القراءة (تشغيل أو إيقاف) =====
             function speakText() {
                 if (!supportsSpeech) {
                     alert('متصفحك لا يدعم قراءة النص صوتياً.');
@@ -731,7 +726,6 @@ Commercial republication or use without prior written permission from the page a
                 if (isReading) {
                     window.speechSynthesis.cancel();
                     isReading = false;
-                    // استعادة أيقونة الصوت
                     readBtn.innerHTML =
                         `<svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
                     return;
@@ -743,7 +737,6 @@ Commercial republication or use without prior written permission from the page a
                     return;
                 }
 
-                // إنشاء كائن الكلام
                 utterance = new SpeechSynthesisUtterance(text);
                 const lang = detectLanguage(text);
                 utterance.lang = lang;
@@ -751,7 +744,6 @@ Commercial republication or use without prior written permission from the page a
                 utterance.pitch = 1;
                 utterance.volume = 1;
 
-                // محاولة اختيار صوت مناسب حسب اللغة
                 const voices = window.speechSynthesis.getVoices();
                 const preferred = voices.find(v => v.lang.startsWith(lang.split('-')[0]));
                 if (preferred) utterance.voice = preferred;
@@ -759,7 +751,7 @@ Commercial republication or use without prior written permission from the page a
                 utterance.onstart = function() {
                     isReading = true;
                     readBtn.innerHTML =
-                        `<svg viewBox="0 0 24 24" width="26" height="26"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`; // أيقونة إيقاف
+                        `<svg viewBox="0 0 24 24" width="26" height="26"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
                 };
 
                 utterance.onend = function() {
@@ -780,54 +772,56 @@ Commercial republication or use without prior written permission from the page a
                 window.speechSynthesis.speak(utterance);
             }
 
-            // ========== وظيفة الترجمة ==========
-            function toggleTranslation() {
+            // ===== وظيفة الترجمة (تبديل اللغة + تشغيل الصوت تلقائياً) =====
+            function toggleTranslationAndSpeak() {
+                // عكس الحالة
                 isEnglish = !isEnglish;
                 if (isEnglish) {
                     policyDiv.classList.add('show-english');
                     translateBtn.setAttribute('aria-label', 'عرض النص العربي');
-                    // تغيير أيقونة الترجمة (اختياري)
-                    // translateBtn.innerHTML = '<i class="fas fa-language" style="color:#2563eb;"></i>';
                 } else {
                     policyDiv.classList.remove('show-english');
-                    translateBtn.setAttribute('aria-label', 'ترجمة إلى الإنجليزية');
+                    translateBtn.setAttribute('aria-label', 'ترجمة إلى الإنجليزية مع القراءة الصوتية');
                 }
 
-                // إيقاف القراءة الحالية إن وجدت
+                // إيقاف أي قراءة حالية
                 if (isReading) {
                     window.speechSynthesis.cancel();
                     isReading = false;
                     readBtn.innerHTML =
                         `<svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
                 }
+
+                // تشغيل القراءة تلقائياً بعد تبديل اللغة (مع تأخير بسيط لضمان تحديث DOM)
+                setTimeout(function() {
+                    speakText(); // سيقرأ النص الجديد تلقائياً
+                }, 100);
             }
 
-            // ========== ربط الأحداث ==========
-            // زر القراءة
+            // ===== ربط الأحداث =====
+            // زر القراءة (يعمل كالمعتاد)
             readBtn.addEventListener('click', speakText);
             readBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault(); // منع السلوك الافتراضي لتجنب التكرار
+                e.preventDefault();
                 speakText();
             }, { passive: false });
 
-            // زر الترجمة
-            translateBtn.addEventListener('click', toggleTranslation);
+            // زر الترجمة (يبدل اللغة ويقرأ تلقائياً)
+            translateBtn.addEventListener('click', toggleTranslationAndSpeak);
             translateBtn.addEventListener('touchstart', function(e) {
                 e.preventDefault();
-                toggleTranslation();
+                toggleTranslationAndSpeak();
             }, { passive: false });
 
-            // ========== تحميل الأصوات مسبقاً (لضمان جاهزيتها) ==========
+            // تحميل الأصوات مسبقاً
             if (supportsSpeech) {
-                // استدعاء getVoices() لتحميل الأصوات
                 window.speechSynthesis.getVoices();
-                // إعادة المحاولة عند تغير الأصوات
                 window.speechSynthesis.onvoiceschanged = function() {
                     window.speechSynthesis.getVoices();
                 };
             }
 
-            // ========== إلغاء القراءة عند مغادرة الصفحة ==========
+            // إلغاء القراءة عند مغادرة الصفحة
             window.addEventListener('beforeunload', function() {
                 if (isReading) {
                     window.speechSynthesis.cancel();
